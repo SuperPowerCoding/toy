@@ -32,6 +32,11 @@ class GameManager
             for( var j = 0 ; j < 4; j++)
                 this.num[i][j] = 0;
         
+        // this.num[0][0] = 2;
+        // this.num[1][0] = 2;
+        // this.num[2][0] = 2;
+        // this.num[3][0] = 2;
+
         this.createRandomNum();
     }
 
@@ -80,10 +85,10 @@ class GameManager
 
     move(y, x, direction) {
         var moved = 0;
+        var merged = 0;
 
         while(true)
         {
-            console.log ('Cur:' + y + ',' + x);
             var nextY = y + this.dir[direction][0];
             var nextX = x + this.dir[direction][1];
 
@@ -93,14 +98,18 @@ class GameManager
             if(nextY < 0 || nextY >= 4 || nextX < 0 || nextX >= 4)
                 break;
 
+            if(merged == 1)
+                break;
+
             if(this.num[y][x] != 0)
             {
                 // 같으면 합친다.
-                if(this.num[y][x] == this.num[nextY][nextX])
+                if(merged == 0 && this.num[y][x] == this.num[nextY][nextX])
                 {
                     this.num[nextY][nextX] = 2 * this.num[y][x];
                     this.num[y][x] = 0;
                     moved = 1;
+                    merged = 1;
                 }
                 else 
                 {
@@ -108,7 +117,7 @@ class GameManager
                     if(this.num[nextY][nextX] == 0){
                         this.num[nextY][nextX] = this.num[y][x];
                         this.num[y][x] = 0;
-                        moved = 1;
+                        moved = 1;                        
                     }
                 }
             }
@@ -123,28 +132,32 @@ class GameManager
     moveLeft(){
         var ret =0 ;
         for(var i = 0; i < 4; i++)
-            ret += this.move(i, 3, this.LEFT);
+            for(var j = 1; j < 4; j++)
+                ret += this.move(i, j, this.LEFT);
         return ret;
     }
 
     moveRight() {
         var ret = 0;
         for(var i = 0; i < 4; i++)
-            ret += this.move(i, 0, this.RIGHT);
+            for(var j = 3; j >= 0; j--)
+                ret += this.move(i, j, this.RIGHT);
         return ret;
     }
 
     moveUp(){
         var ret = 0;
         for(var i = 0; i < 4; i++)
-            ret += this.move(3, i, this.UP);
+            for(var j = 1; j < 4; j++)
+                ret += this.move(j, i, this.UP);
         return ret;
     }
 
     moveDown(){
         var ret = 0;
         for(var i = 0; i < 4; i++)
-            ret += this.move(0, i, this.DOWN);
+            for(var j = 3; j >= 0; j--)
+                ret += this.move(j, i, this.DOWN);
         return ret;
     }
 }
@@ -186,18 +199,19 @@ var fontDic = {
     2 : 'bold 25px Verdana',
     4 : 'bold 25px Verdana',
     8 : 'bold 25px Verdana',
-    16 : 'bold 22px Verdana',
-    32 : 'bold 22px Verdana',
-    64 : 'bold 22px Verdana',
-    128 : 'bold 20px Verdana',
-    256 : 'bold 20px Verdana',
-    512 : 'bold 20px Verdana',
-    1024 : 'bold 18px Verdana',
-    2048 : 'bold 18px Verdana',
+    16 : 'bold 20px Verdana',
+    32 : 'bold 20px Verdana',
+    64 : 'bold 20px Verdana',
+    128 : 'bold 15px Verdana',
+    256 : 'bold 15px Verdana',
+    512 : 'bold 15px Verdana',
+    1024 : 'bold 10px Verdana',
+    2048 : 'bold 10px Verdana',
+    4096 : 'bold 10px Verdana',
+    8192 : 'bold 10px Verdana',
+    16384 :  'bold 5px Verdana',
+
 };
-
-
-// console.log(colorDic);
 
 class Square {
     constructor(){
@@ -207,11 +221,17 @@ class Square {
     }
 
     getColor(number){
-
-        // console.log(number);
-
-        // console.log(number + ',' + colorDic[number]);
+        var num = parseInt(number);
+        if(num >= 2048)
+            return fontDic['2048'];
         return colorDic[number];
+    }
+
+    getFront(number){        
+        var num = parseInt(number);
+        if(num >= 16384)
+            return fontDic['16384'];
+        return fontDic[number];
     }
 
     draw(){
@@ -223,7 +243,7 @@ class Square {
             return;
 
         ctx.fillStyle = fontColor;
-        ctx.font = font;
+        ctx.font = this.getFront(this.num);
         ctx.textAlign="center"; 
         ctx.textBaseline = "middle";
         ctx.fillText(this.num, this.x + this.width / 2, this.y + this.height / 2);
@@ -321,6 +341,10 @@ function moveRight(){
     move('ArrowRight');
 }
 
+function restart(){
+    game.init();
+    drawAll();
+}
 
 
 document.addEventListener('keydown', (event) => {
