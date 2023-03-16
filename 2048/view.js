@@ -200,9 +200,9 @@ var game = new GameManager();
 game.init();
 
 
-var font = 'bold 25px Verdana';
+var font = 'bold 45px Verdana';
 var fontColor = '#786c5e';
-var boxSize = 50;
+var boxSize = 130;
 
 var colorDic = {
     0 : '#ffffff',
@@ -213,28 +213,28 @@ var colorDic = {
     32 : '#f97a5f',            
     64 : '#f75c3d',
     128 : '#edce73',
-    256 : '#eec750', //
+    256 : '#eec750', 
     512 : '#eec750',
     1024 : '#efe4da',
     2048 : '#f0cb73',
 };
 
 var fontDic = {
-    0 : 'bold 25px Verdana',
-    2 : 'bold 25px Verdana',
-    4 : 'bold 25px Verdana',
-    8 : 'bold 25px Verdana',
-    16 : 'bold 20px Verdana',
-    32 : 'bold 20px Verdana',
-    64 : 'bold 20px Verdana',
-    128 : 'bold 15px Verdana',
-    256 : 'bold 15px Verdana',
-    512 : 'bold 15px Verdana',
-    1024 : 'bold 10px Verdana',
-    2048 : 'bold 10px Verdana',
-    4096 : 'bold 10px Verdana',
-    8192 : 'bold 10px Verdana',
-    16384 :  'bold 5px Verdana',
+    0 : 'bold 75px Verdana',
+    2 : 'bold 75px Verdana',
+    4 : 'bold 75px Verdana',
+    8 : 'bold 75px Verdana',
+    16 : 'bold 60px Verdana',
+    32 : 'bold 60px Verdana',
+    64 : 'bold 60px Verdana',
+    128 : 'bold 45px Verdana',
+    256 : 'bold 45px Verdana',
+    512 : 'bold 45px Verdana',
+    1024 : 'bold 30px Verdana',
+    2048 : 'bold 30px Verdana',
+    4096 : 'bold 30px Verdana',
+    8192 : 'bold 30px Verdana',
+    16384 :  'bold 15px Verdana',
 
 };
 
@@ -276,15 +276,17 @@ class Square {
     }
 }
 
+var score_offset = 100;
 var square = [];
+var thick = 20;
 for(var y = 0; y < 4; y++)
 {
     var ss= [];
     for(var x = 0; x < 4; x++)
     {
         var s = new Square();
-        s.y = 40 + boxSize + y * (boxSize + 10);
-        s.x = boxSize + x * (boxSize + 10);
+        s.y = 20 + boxSize + y * (boxSize + thick);
+        s.x = 50 + x * (boxSize + thick);
         ss.push(s);
     }
 
@@ -302,13 +304,13 @@ function drawAll()
     ctx.fillStyle = 'black';
     ctx.font = font;
     ctx.textAlign="left"; 
-    ctx.fillText('SCORE : ' + game.getScore(), 40, 40);
+    ctx.fillText('SCORE : ' + game.getScore(), 40, score_offset - 10);
     
     ctx.fillStyle = '#faf8f0';
-    ctx.fillRect( 25 , 40 + 25, boxSize * 4 + 10 * 4 + 20 + 20, boxSize * 4 + 10 * 4 + 20 + 20 );
+    ctx.fillRect( 20 , score_offset + 20, boxSize * 4 + thick * 6, boxSize * 4 + thick * 4 + 20 + thick );
     
     ctx.fillStyle = '#bdafa2';
-    ctx.fillRect( 35 , 40 + 35, boxSize * 4 + 10 * 4 + 20, boxSize * 4 + 10 * 4 + 20 );
+    ctx.fillRect( 35 , score_offset + 35, boxSize * 4 + thick * 4 + 10, boxSize * 4 + thick * 4 + 10 );
 
     for(var y = 0; y < 4; y++) 
     {
