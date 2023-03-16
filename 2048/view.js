@@ -5,6 +5,7 @@ canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 
 var font = 'bold 25px Verdana';
+var fontColor = '#786c5e';
 
 var boxSize = 50;
 
@@ -20,7 +21,7 @@ class Square {
         ctx.fillStyle = '#efe4da';
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = fontColor;
         ctx.font = font;
         ctx.fillText(this.num, this.x + this.width / 3, this.y + this.height / 3 * 2);
     }
