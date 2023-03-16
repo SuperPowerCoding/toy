@@ -65,7 +65,11 @@ class GameManager
 
     // 움직여도 소용 없는 상황
     checkEnd(){        
-        var arr = this.num.slice();
+        var arr = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]; //this.num.slice();
+
+        for(var i=0; i < 4; i++)
+            for(var j=0; j < 4; j++)
+                arr[i][j] = this.num[i][j];
 
         for(var i = 0; i < 4; i++)
             for(var j = 1; j < 4; j++)
@@ -322,7 +326,8 @@ function move(key)
 {
     var ret = 0;
 
-    if(false) { // game.checkEnd() == true){        
+    // if(false) { 
+    if ( game.checkEnd() == true){        
         var element = document.getElementById('inform');
         element.innerText = 'Game Over!!';
         return ;
