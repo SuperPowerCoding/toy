@@ -153,8 +153,8 @@ class GameManager
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth - 100;
-canvas.height = window.innerHeight - 100;
+// canvas.width = window.innerWidth - 100;
+// canvas.height = window.innerHeight - 100;
 
 
 
@@ -238,7 +238,7 @@ for(var y = 0; y < 4; y++)
     for(var x = 0; x < 4; x++)
     {
         var s = new Square();
-        s.y = boxSize + y * (boxSize + 10);
+        s.y = 40 + boxSize + y * (boxSize + 10);
         s.x = boxSize + x * (boxSize + 10);
         ss.push(s);
     }
@@ -248,28 +248,22 @@ for(var y = 0; y < 4; y++)
 
 
 
-var score = {
-    x : 20, 
-    y : 20,
-
-    draw(num) {
-        ctx.fillStyle = 'black';
-        ctx.font = font;        
-        ctx.fillText('SCORE : ' + num, this.x, this.y);
-    }
-}
-
 // console.log(square);
 
 function drawAll()
 {
-    score.draw(game.getScore());
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = 'black';
+    ctx.font = font;
+    ctx.textAlign="left"; 
+    ctx.fillText('SCORE : ' + game.getScore(), 40, 40);
+    
     ctx.fillStyle = '#faf8f0';
-    ctx.fillRect( 25 , 25, boxSize * 4 + 10 * 4 + 20 + 20, boxSize * 4 + 10 * 4 + 20 + 20 );
+    ctx.fillRect( 25 , 40 + 25, boxSize * 4 + 10 * 4 + 20 + 20, boxSize * 4 + 10 * 4 + 20 + 20 );
     
     ctx.fillStyle = '#bdafa2';
-    ctx.fillRect( 35 , 35, boxSize * 4 + 10 * 4 + 20, boxSize * 4 + 10 * 4 + 20 );
+    ctx.fillRect( 35 , 40 + 35, boxSize * 4 + 10 * 4 + 20, boxSize * 4 + 10 * 4 + 20 );
 
     for(var y = 0; y < 4; y++) 
     {
@@ -283,36 +277,56 @@ function drawAll()
 
 drawAll();
 
-document.addEventListener('keydown', (event) => {
-    // console.log(event);
-    
+function move(key)
+{
     var ret = 0;
 
-    if(event.key == 'ArrowDown'){        
+    if(key == 'ArrowDown'){        
         ret = game.moveDown();
     }
 
-    if(event.key == 'ArrowUp'){        
+    if(key == 'ArrowUp'){        
         ret = game.moveUp();
     }
 
-    if(event.key == 'ArrowLeft'){        
+    if(key == 'ArrowLeft'){        
         ret = game.moveLeft();
     }
 
-    if(event.key == 'ArrowRight'){
+    if(key == 'ArrowRight'){
         ret = game.moveRight();
     }
 
     if(ret == 0)
         return;
 
-    // ctx.fillStyle = 'white';
-    // ctx.fillRect(0, 0, ctx.width, ctx.height);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     game.createRandomNum();
 
     drawAll();
+}
 
+function moveUp(){
+    move('ArrowUp');
+}
+
+function moveDown(){
+    move('ArrowDown');
+}
+
+function moveLeft(){
+    move('ArrowLeft');
+}
+
+function moveRight(){
+    move('ArrowRight');
+}
+
+
+
+document.addEventListener('keydown', (event) => {
+    move(event.key);
 });
+
+// document.getElementById("DownBtn").onclick = function () {
+// move('ArrowDown');
+// };
