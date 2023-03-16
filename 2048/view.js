@@ -17,7 +17,7 @@ class Square {
 
     draw(){
 
-        ctx.fillStyle = '#ff0000';
+        ctx.fillStyle = '#efe4da';
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
         ctx.fillStyle = 'black';
