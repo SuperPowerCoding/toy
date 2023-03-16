@@ -64,9 +64,30 @@ class GameManager
     }
 
     // 움직여도 소용 없는 상황
-    // 
-    checkEnd(){
+    checkEnd(){        
+        var arr = this.num.slice();
 
+        for(var i = 0; i < 4; i++)
+            for(var j = 1; j < 4; j++)
+                if(this.move(arr, i, j, this.LEFT) == 1)
+                    return false;
+       
+        for(var i = 0; i < 4; i++)
+            for(var j = 3; j >= 0; j--)
+                if(this.move(arr, i, j, this.RIGHT) == 1)
+                    return false;
+    
+        for(var i = 0; i < 4; i++)
+            for(var j = 1; j < 4; j++)
+                if(this.move(arr, j, i, this.UP) == 1)
+                    return false;
+    
+        for(var i = 0; i < 4; i++)
+            for(var j = 3; j >= 0; j--)
+                if(this.move(arr, j, i, this.DOWN) == 1)
+                    return false;
+
+        return true;
     }
 
     getNum(y,x){
@@ -83,7 +104,7 @@ class GameManager
         return this.score;
     }
 
-    move(y, x, direction) {
+    move(num, y, x, direction) {
         var moved = 0;
         var merged = 0;
 
@@ -101,22 +122,22 @@ class GameManager
             if(merged == 1)
                 break;
 
-            if(this.num[y][x] != 0)
+            if(num[y][x] != 0)
             {
                 // 같으면 합친다.
-                if(merged == 0 && this.num[y][x] == this.num[nextY][nextX])
+                if(merged == 0 && num[y][x] == num[nextY][nextX])
                 {
-                    this.num[nextY][nextX] = 2 * this.num[y][x];
-                    this.num[y][x] = 0;
+                    num[nextY][nextX] = 2 * num[y][x];
+                    num[y][x] = 0;
                     moved = 1;
                     merged = 1;
                 }
                 else 
                 {
                     // 0인 경우
-                    if(this.num[nextY][nextX] == 0){
-                        this.num[nextY][nextX] = this.num[y][x];
-                        this.num[y][x] = 0;
+                    if(num[nextY][nextX] == 0){
+                        num[nextY][nextX] = num[y][x];
+                        num[y][x] = 0;
                         moved = 1;                        
                     }
                 }
@@ -133,7 +154,7 @@ class GameManager
         var ret =0 ;
         for(var i = 0; i < 4; i++)
             for(var j = 1; j < 4; j++)
-                ret += this.move(i, j, this.LEFT);
+                ret += this.move(this.num, i, j, this.LEFT);
         return ret;
     }
 
@@ -141,7 +162,7 @@ class GameManager
         var ret = 0;
         for(var i = 0; i < 4; i++)
             for(var j = 3; j >= 0; j--)
-                ret += this.move(i, j, this.RIGHT);
+                ret += this.move(this.num,i, j, this.RIGHT);
         return ret;
     }
 
@@ -149,7 +170,7 @@ class GameManager
         var ret = 0;
         for(var i = 0; i < 4; i++)
             for(var j = 1; j < 4; j++)
-                ret += this.move(j, i, this.UP);
+                ret += this.move(this.num,j, i, this.UP);
         return ret;
     }
 
@@ -157,7 +178,7 @@ class GameManager
         var ret = 0;
         for(var i = 0; i < 4; i++)
             for(var j = 3; j >= 0; j--)
-                ret += this.move(j, i, this.DOWN);
+                ret += this.move(this.num,j, i, this.DOWN);
         return ret;
     }
 }
@@ -301,6 +322,13 @@ function move(key)
 {
     var ret = 0;
 
+    if(game.checkEnd() == true){        
+        var element = document.getElementById('inform');
+        element.innerText = 'Game Over!!';
+        return ;
+    }
+
+
     if(key == 'ArrowDown'){        
         ret = game.moveDown();
     }
@@ -323,6 +351,7 @@ function move(key)
     game.createRandomNum();
 
     drawAll();
+
 }
 
 function moveUp(){
@@ -344,6 +373,8 @@ function moveRight(){
 function restart(){
     game.init();
     drawAll();
+    var element = document.getElementById('inform');
+    element.innerText = 'Press Up, Down, Left, Right Arrow Key or Button';
 }
 
 
