@@ -4,21 +4,44 @@
     <meta charset="utf-8">
     <title>2048</title>
     <link href="button.css" rel="stylesheet">
+    <style>
+
+        #container {            
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        canvas {
+            text-align: right;
+            display: inline;
+        }
+
+    </style>
+
   </head>
   <body>
-        <canvas id="canvas" width="500" height="350"></canvas>
-        
-        <!-- <script type="module" src="./model.js"></script> -->
-        <script src="./view.js"></script>
-        <h3>Press Up, Down, Left, Right Arrow Key or Button</h3>
-        <div style="justify-content : center;">
-            <a href="javascript:void(0);" onclick="moveUp();" class="btn-gradient red mini" id="UpBtn">↑</a>
-            <a href="javascript:void(0);" onclick="moveDown();" class="btn-gradient red mini" id="DownBtn">↓</a>
-            <a href="javascript:void(0);" onclick="moveLeft();" class="btn-gradient red mini" id="LeftBtn">←</a>
-            <a href="javascript:void(0);" onclick="moveRight();" class="btn-gradient red mini" id="RightBtn">→</a>
+        <div>
+            <div id="container">
+                <canvas id="canvas" width="350" height="350" ></canvas>
+                <script src="./view.js"></script>    
+            </div>
+            <div id="container">
+                <h3 style="text-align:center">Press Up, Down, Left, Right Arrow Key or Button</h3>
+
+            </div>
+            <div id="container">
+                <a href="javascript:void(0);" onclick="moveUp();" class="btn-gradient red mini" id="UpBtn">↑</a>
+                <a href="javascript:void(0);" onclick="moveDown();" class="btn-gradient red mini" id="DownBtn">↓</a>
+                <a href="javascript:void(0);" onclick="moveLeft();" class="btn-gradient red mini" id="LeftBtn">←</a>
+                <a href="javascript:void(0);" onclick="moveRight();" class="btn-gradient red mini" id="RightBtn">→</a>
+            </div>
+            <div id="container">
+                <a href="javascript:void(0);" onclick="restart();" class="btn-gradient blue" id="RightBtn">Restart</a>
+            </div>
         </div>
+
         
-        <a href="javascript:void(0);" onclick="restart();" class="btn-gradient blue" id="RightBtn">Restart</a>
+       
 
   </body>
 </html>
