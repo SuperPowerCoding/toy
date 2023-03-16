@@ -181,6 +181,22 @@ var colorDic = {
     2048 : '#f0cb73',
 };
 
+var fontDic = {
+    0 : 'bold 25px Verdana',
+    2 : 'bold 25px Verdana',
+    4 : 'bold 25px Verdana',
+    8 : 'bold 25px Verdana',
+    16 : 'bold 22px Verdana',
+    32 : 'bold 22px Verdana',
+    64 : 'bold 22px Verdana',
+    128 : 'bold 20px Verdana',
+    256 : 'bold 20px Verdana',
+    512 : 'bold 20px Verdana',
+    1024 : 'bold 18px Verdana',
+    2048 : 'bold 18px Verdana',
+};
+
+
 // console.log(colorDic);
 
 class Square {
@@ -208,7 +224,10 @@ class Square {
 
         ctx.fillStyle = fontColor;
         ctx.font = font;
-        ctx.fillText(this.num, this.x + this.width / 3, this.y + this.height / 3 * 2);
+        ctx.textAlign="center"; 
+        ctx.textBaseline = "middle";
+        ctx.fillText(this.num, this.x + this.width / 2, this.y + this.height / 2);
+        // ctx.fillText(this.num, this.x + this.width / 3, this.y + this.height / 3 * 2);
     }
 }
 
