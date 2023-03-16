@@ -3,10 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>2048</title>
+    <link href="button.css" rel="stylesheet">
   </head>
   <body>
-        <canvas id="canvas" width="1280" height="726"></canvas>
+        <canvas id="canvas" width="500" height="350"></canvas>
+        
+        <!-- <script type="module" src="./model.js"></script> -->
         <script src="./view.js"></script>
+        <h3>Press Up, Down, Left, Right Arrow Key or button</h3>
+        <a href="javascript:void(0);" onclick="moveUp();" class="btn-gradient red mini" id="UpBtn">↑</a>
+        <a href="javascript:void(0);" onclick="moveDown();" class="btn-gradient red mini" id="DownBtn">↓</a>
+        <a href="javascript:void(0);" onclick="moveLeft();" class="btn-gradient red mini" id="LeftBtn">←</a>
+        <a href="javascript:void(0);" onclick="moveRight();" class="btn-gradient red mini" id="RightBtn">→</a>
   </body>
 </html>
-
