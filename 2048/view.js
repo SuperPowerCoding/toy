@@ -322,7 +322,7 @@ function move(key)
 {
     var ret = 0;
 
-    if(game.checkEnd() == true){        
+    if(false) { // game.checkEnd() == true){        
         var element = document.getElementById('inform');
         element.innerText = 'Game Over!!';
         return ;
