@@ -4,7 +4,7 @@ var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
 
-var font = '25px serif';
+var font = '25px Verdana';
 
 var boxSize = 50;
 
