@@ -152,15 +152,19 @@ function drawAll(data)
 
 restart()
 
+function request(cmd){
+    fetch(`https://port-0-toy-p8xrq2mlfcq5ogo.sel3.cloudtype.app/2048/${cmd}`)
+        .then((response) => response.json())
+        .then((data) => {
+            action(data);            
+        });
+}
+
 function restart(){
     var element = document.getElementById('inform') || {};  // loading null error 방지
     element.innerText = 'Press Up, Down, Left, Right Arrow Key or Button';
     
-    fetch(`https://port-0-toy-p8xrq2mlfcq5ogo.sel3.cloudtype.app/2048/init`)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);
-        });
+    request('init');
 }
 
 function action(data){
@@ -175,13 +179,24 @@ function action(data){
 
 document.addEventListener('keydown', (event) => {
     var cmd = event.key
-
-    fetch(`https://port-0-toy-p8xrq2mlfcq5ogo.sel3.cloudtype.app/2048/${cmd}`)
-        .then((response) => response.json())
-        .then((data) => {
-            action(data);            
-        });
+    request(cmd)
 });
+
+function moveUp(){
+    request('ArrayUp')
+}
+
+function moveDown(){
+    request('ArrayDown')
+}
+
+function moveRight(){
+    request('ArrayRight')
+}
+
+function moveLeft(){
+    request('ArrayLeft')
+}
 
 // document.getElementById("DownBtn").onclick = function () {
 // move('ArrowDown');
