@@ -276,17 +276,34 @@ class Square {
     }
 }
 
-var score_offset = 100;
+
 var square = [];
+var score_offset = 100;
 var thick = 20;
+var boxSize = 130;
+
+var outer =  {
+    x : 20,
+    y : 20 + score_offset,
+    width : boxSize * 4 + thick * 7,
+    height : boxSize * 4 + thick * 7,
+}
+
+var inner =  {
+    x : outer['x'] + thick,
+    y : outer['y'] + thick,
+    width : boxSize * 4 + thick * 5,
+    height : boxSize * 4 + thick * 5,
+}
+
 for(var y = 0; y < 4; y++)
 {
     var ss= [];
     for(var x = 0; x < 4; x++)
     {
         var s = new Square();
-        s.y = 20 + boxSize + y * (boxSize + thick);
-        s.x = 50 + x * (boxSize + thick);
+        s.y = inner['y'] + thick + y * (boxSize + thick);
+        s.x = inner['x'] + thick + x * (boxSize + thick);
         ss.push(s);
     }
 
@@ -307,10 +324,12 @@ function drawAll()
     ctx.fillText('SCORE : ' + game.getScore(), 40, score_offset - 10);
     
     ctx.fillStyle = '#faf8f0';
-    ctx.fillRect( 20 , score_offset + 20, boxSize * 4 + thick * 6, boxSize * 4 + thick * 4 + 20 + thick );
+    
+    
+    ctx.fillRect( outer['x'] , outer['y'], outer['width'], outer['height'] );
     
     ctx.fillStyle = '#bdafa2';
-    ctx.fillRect( 35 , score_offset + 35, boxSize * 4 + thick * 4 + 10, boxSize * 4 + thick * 4 + 10 );
+    ctx.fillRect( inner['x'], inner['y'], inner['width'], inner['height']);
 
     for(var y = 0; y < 4; y++) 
     {
