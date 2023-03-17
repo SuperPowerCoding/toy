@@ -156,7 +156,7 @@ function restart(){
     var element = document.getElementById('inform') || {};  // loading null error 방지
     element.innerText = 'Press Up, Down, Left, Right Arrow Key or Button';
     
-    fetch(`http://localhost:3000/2048/init`)
+    fetch(`https://port-0-toy-p8xrq2mlfcq5ogo.sel3.cloudtype.app/2048/init`)
         .then((response) => response.json())
         .then((data) => {
             action(data);
@@ -176,7 +176,7 @@ function action(data){
 document.addEventListener('keydown', (event) => {
     var cmd = event.key
 
-    fetch(`http://localhost:3000/2048/${cmd}`)
+    fetch(`https://port-0-toy-p8xrq2mlfcq5ogo.sel3.cloudtype.app/2048/${cmd}`)
         .then((response) => response.json())
         .then((data) => {
             action(data);            
