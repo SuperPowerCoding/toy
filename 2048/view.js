@@ -183,19 +183,19 @@ document.addEventListener('keydown', (event) => {
 });
 
 function moveUp(){
-    request('ArrayUp')
+    request('ArrawUp')
 }
 
 function moveDown(){
-    request('ArrayDown')
+    request('ArrawDown')
 }
 
 function moveRight(){
-    request('ArrayRight')
+    request('ArrawRight')
 }
 
 function moveLeft(){
-    request('ArrayLeft')
+    request('ArrawLeft')
 }
 
 // document.getElementById("DownBtn").onclick = function () {
