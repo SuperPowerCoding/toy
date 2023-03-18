@@ -182,20 +182,8 @@ document.addEventListener('keydown', (event) => {
     request(cmd)
 });
 
-function moveUp(){
-    request('ArrowUp')
-}
-
-function moveDown(){
-    request('ArrowDown')
-}
-
-function moveRight(){
-    request('ArrowRight')
-}
-
-function moveLeft(){
-    request('ArrowLeft')
+function move(req){
+    request(req)
 }
 
 // document.getElementById("DownBtn").onclick = function () {

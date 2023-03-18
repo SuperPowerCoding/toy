@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     // res.send('Hello World')
     // res.sendFile('index.html')
     // res.send('<h1>1234</h1>')
-    
+    res.sendFile(__dirname + 'index.html');
 })
 
 app.get('/2048/:cmd', (req, res) => {
